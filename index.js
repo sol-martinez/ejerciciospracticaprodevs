@@ -51,9 +51,30 @@ function totalBis(arr) {
 //Escribí una función llamada promedio que calcule el promedio (media) de los números en un array.
 //  Debés hacerlo usando el método .reduce. El promedio es el total dividido por la cantidad de elementos.
 
+
+// inicializa una variable donde se guardará el valor final del metodo .reduce()
+// Uso reduce para sumar todos los elementos del array.
+// 'acumulador' guarda la suma parcial, 'item' es el valor actual.
+// Empieza desde 0.
+
 function promedio(arr) {
- 
+  let suma = arr.reduce((acumulador, item) => {
+      return acumulador + item 
+  },0 )
+    let promedio = suma / arr.length // Divido la suma total por la cantidad de elementos del array para obtener el promedio
+
+    return promedio // Devuelvo el promedio calculado
+
+    /*OTRA MANERA MAS CORTA
+    let promedio = arr.reduce((acumulador, item, index) => {
+        return index === arr.length - 1 ? (acumulador + item) / arr.length : acumulador + item;
+        
+    }, 0)
+
+    return promedio
+    */
 }
+
 
 //Reescribí la función anterior (promedio) sin usar .reduce.
 //  Esta vez usá un bucle for para sumar los valores y calcular el promedio dividiendo por la cantidad de elementos.
