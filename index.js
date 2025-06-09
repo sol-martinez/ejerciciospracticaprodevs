@@ -30,7 +30,10 @@ function mayor(arr) {
 //Definí una función llamada total que sume todos los valores de un array numérico usando el método .reduce. Retorná la suma total
 
 function total(arr) {
- 
+  let suma = arr.reduce((acumulador, item) => {
+    return acumulador + item;
+  },0 )
+  return suma;
 }
 
 //Implementá la misma funcionalidad que en el ejercicio anterior (total), 
