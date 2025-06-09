@@ -40,7 +40,11 @@ function total(arr) {
 // pero sin usar .reduce. Esta vez, deberás usar un bucle for para recorrer el array y acumular el resultado.
 
 function totalBis(arr) {
-  
+  let suma = arr[0]; // Inicializo una variable con el primer valor de la array
+  for(let i=1; i < arr.length; i++){ // Recorro el array desde el segundo elemento hasta el final
+    suma += arr[i] // Sumo el valor actual al acumulador suma
+  }
+  return suma // Devuelvo el total acumulado
 }
 
 
