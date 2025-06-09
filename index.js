@@ -10,7 +10,7 @@
 function minimo(arr) {
   let valorMasChico = arr[0]; // Inicializo una variable con el primer valor del array
   for (let i = 1; i < arr.length; i++){ // Recorro todo el array con un bucle for
-    if(valorMasChico > arr[i]) valorMasChico = arr[i] // Si el valor actual del array es menor que el que tengo guardado, lo reemplazo
+    if(valorMasChico > arr[i]) valorMasChico = arr[i]; // Si el valor actual del array es menor que el que tengo guardado, lo reemplazo
   }
   return valorMasChico // Devuelvo el valor más chico encontrado
 }
@@ -20,7 +20,11 @@ function minimo(arr) {
 // No podés usar Math.max. Deberás recorrer el array manualmente y comparar los valores.
 
 function mayor(arr) {
- 
+  let valorMasGrande = arr[0];
+  for (let i = 1; i < arr.length; i++){
+    if(valorMasGrande < arr[i]) valorMasGrande = arr[i];
+  }
+  return valorMasGrande
 }
 
 //Definí una función llamada total que sume todos los valores de un array numérico usando el método .reduce. Retorná la suma total
