@@ -8,7 +8,11 @@
 
 
 function minimo(arr) {
-  
+  let valorMasChico = arr[0]; // Inicializo una variable con el primer valor del array
+  for (let i = 1; i < arr.length; i++){ // Recorro todo el array con un bucle for
+    if(valorMasChico > arr[i]) valorMasChico = arr[i] // Si el valor actual del array es menor que el que tengo guardado, lo reemplazo
+  }
+  return valorMasChico // Devuelvo el valor más chico encontrado
 }
 
 //Creá una función llamada mayor que tome un array 
@@ -22,14 +26,14 @@ function mayor(arr) {
 //Definí una función llamada total que sume todos los valores de un array numérico usando el método .reduce. Retorná la suma total
 
 function total(arr) {
-  
+ 
 }
 
 //Implementá la misma funcionalidad que en el ejercicio anterior (total), 
 // pero sin usar .reduce. Esta vez, deberás usar un bucle for para recorrer el array y acumular el resultado.
 
 function totalBis(arr) {
- 
+  
 }
 
 
