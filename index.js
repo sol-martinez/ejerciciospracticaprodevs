@@ -40,7 +40,7 @@ function total(arr) {
 // pero sin usar .reduce. Esta vez, deberás usar un bucle for para recorrer el array y acumular el resultado.
 
 function totalBis(arr) {
-  let suma = arr[0]; // Inicializo una variable con el primer valor de la array
+  let suma = arr[0]; // Inicializo la variable suma con el primer valor de la array
   for(let i=1; i < arr.length; i++){ // Recorro el array desde el segundo elemento hasta el final
     suma += arr[i] // Sumo el valor actual al acumulador suma
   }
@@ -80,6 +80,11 @@ function promedio(arr) {
 //  Esta vez usá un bucle for para sumar los valores y calcular el promedio dividiendo por la cantidad de elementos.
 
 function promedioBis(arr) {
+  let suma = 0; // Inicializo la variable suma con el primer valor del array
+  for (let i = 0; i < arr.length; i++){ // Recorro todo el array con un bucle for
+    suma += arr[i]; // En cada vuelta, le sumo el valor actual del array a la variable suma
+  }
+  return suma / arr.length; // Divido la suma total por la cantidad de elementos para obtener el promedio
   
 }
 
