@@ -65,7 +65,7 @@ function promedio(arr) {
 
     return promedio // Devuelvo el promedio calculado
 
-    /*OTRA MANERA MAS CORTA
+    /*CON IF TERNARIO
     let promedio = arr.reduce((acumulador, item, index) => {
         return index === arr.length - 1 ? (acumulador + item) / arr.length : acumulador + item;
         
@@ -110,24 +110,119 @@ function Nodo(data) {
 
 function crearListaEnlazada() {
   const lista = {
+    point: null,
+    len: 0,
     
+    insertFirst(data){
+      const newNode = Nodo(data);
+      newNode.next = this.point;
+      this.point = newNode;
+      this.len++;
+      return newNode
+    },
 
-  
+    insertLast(data){
+      const newNode = Nodo(data);
+      if(!this.point){
+        this.point = newNode;
+      }else{
+        let current = this.point;
+        while(current.next){
+          current = current.next;
+        }
+        current.next=newNode;
+      }
+      this.len++
+      return newNode
+    },
+
+    push(data){
+      return this.insertFirst(data)
+    },
+    
+    insert(data, pos){
+       if(pos > this.len ){
+    // insertar al final
+        this.insertLast(data)
+        return
+      }
+      const newNode = Nodo(data);
+      if (pos === 1) {
+    // Insertar al principio
+    newNode.next = this.point;
+    this.point = newNode;
+  } else {
+    // Insertar en una posición intermedia
+    let current = this.point;
+    for (let i = 1; i < pos - 1; i++) {
+      current = current.next;
+    }
+    newNode.next = current.next;
+    current.next = newNode;
+  }
+
+  this.len++;
+
+    },
+
+    deleteFirst(){
+      if(!this.point) return console.log(`Lista vacia`)
+       if(!this.point.next){
+        this.point=null;
+        this.len--;
+       }
+    },
+
+    deleteLast(){
+      if(!this.point) return console.log(`Lista vacia`)
+       if(!this.point.next){
+        this.point=null;
+        this.len--;
+       }
+      
+      let current = this.point;
+      while(current.next.next){
+        current=current.next;
+      }
+      const value = current.next.data;
+      current.next=null;
+      this.len--;
+      return value
+    },
+
+    print(){
+      if(!this.point) return console.log(`Lista vacia`);
+      let current = this.point;
+      while(current){
+        console.log(current.data);
+        current = current.next;
+      }
+    },
+
+    find(valor){
+      let current = this.point;
+      while(current){
+        if(current.data=== valor) return current;
+        current = current.next
+      }
+      return undefined;
+    }
+
   };
 
   return lista;
 }
 
 
-// var list = new Lista();
+//var list = new Lista();
 
-// list.push(1);
+//list.push(1);
 // list.push(2);
 // list.push(3);
 // list.push(4);
 
 // list.print()
-
+3
 
 //MATRIZ
 //Implementá una clase Matriz que permita representar matrices bidimensionales y realizar operaciones básicas con ellas. Debe contar con los siguientes métodos:
@@ -141,9 +236,77 @@ function crearListaEnlazada() {
 
 
 class Matriz {
- 
+    constructor(filas, columnas){
+      this.filas = filas;
+      this.columnas = columnas;
+      this.data = Array.from({length: filas}, () => Array(columnas).fill(undefined));
+
+    }
+
+    buscar(valor){
+      for(let i = 0; i < this.filas; i++){
+        for(let j = 0; j < this.columnas; j++){
+          if(this.data[i][j] === valor){
+            return [i,j];
+          }
+        }
+      }
+      return undefined
+    }
+
+    sumar(otraMatriz){
+      if(this.filas!==otraMatriz.filas || this.columnas !== otraMatriz.columnas){
+        throw new Error(`Las matrices deben tener las mismas dimensiones para sumar.`);
+      }
+
+      let resultado = new Matriz(this.filas, this.columnas);
+      for(let i = 0; i < this.filas; i++){
+        for(let j = 0; j < this.columnas; j++){
+          resultado.data[i][j] = this.data[i][j] + otraMatriz.data[i][j] 
+        }
+        }
+        return resultado
+
+    }
+
+    restar(otraMatriz){
+      if(this.filas!==otraMatriz.filas || this.columnas !== otraMatriz.columnas){
+        throw new Error(`Las matrices deben tener las mismas dimensiones para restar.`);
+      }
+
+      let resultado = new Matriz(this.filas, this.columnas);
+      for(let i = 0; i < this.filas; i++){
+        for(let j = 0; j < this.columnas; j++){
+          resultado.data[i][j] = this.data[i][j] - otraMatriz.data[i][j] 
+        }
+        }
+        return resultado
+    }
+
+    multiplicar(otraMatriz){
+      if(this.columnas!==otraMatriz.filas){
+        throw new Error(`Las dimensiones no son compatibles para multiplicación.`);
+      }
+
+      let resultado = new Matriz(this.filas, otraMatriz.columnas);
+      for(let i = 0; i < this.filas; i++){
+        for(let j = 0; j < otraMatriz.columnas; j++){
+          resultado.data[i][j] = 0;
+          for (let k = 0; k < this.columnas; k++){
+          resultado.data[i][j] += this.data[i][k] * otraMatriz.data[k][j] 
+        }
+      }
+    }
+    return resultado
   }
 
+  print(){
+  for(let i = 0; i < this.filas; i++) {
+    console.log(this.data[i].join(' '));
+  }
+}
+
+}
  
 
 
@@ -155,18 +318,71 @@ class Matriz {
 
 class Pila {
   constructor() {
-  
+  this._arr = [];
   }
 
+  push(a){ //agregar al arreglo
+    return this._arr.push(a);
+  }
+
+  pop(){ //eliminar del arreglo
+    return this._arr.pop();
+  }
+
+  len(){ //longitud del arreglo
+    return this._arr.length;
+  }
+
+  getArr(){
+    return this._arr;
+  }
  
 }
 
 class Torre {
   constructor() {
-  
+  this._t1 = new Pila();
+  this._t2 = new Pila();
+  this._t3 = new Pila();
   }
 
-  
+  init(n){
+    for(let i = n; i >= 1; i--){
+      this._t1.push(i);
+    }
+    return this
+  }
+
+  solve(disk=null, source=null, dest=null, aux=null){
+    if(disk === null) {
+      disk = this._t1.len();
+      source = this._t1;
+      dest= this._t3;
+      aux = this._t2;
+    }
+    if(disk === 1){
+      dest.push(source.pop())
+      return 
+    }
+
+    this.solve(disk - 1, source, aux, dest)
+    dest.push(source.pop());
+    this.solve(disk - 1, aux, dest, source)
+
+  }
+
+  getTorre1(){
+    return this._t1.getArr()
+  }
+
+  getTorre2(){
+    return this._t2.getArr()
+  }
+
+  getTorre3(){
+    return this._t3.getArr()
+  }
+
 }
 
 
